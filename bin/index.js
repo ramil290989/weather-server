@@ -7,7 +7,8 @@ import dataGetter from '../src/dataGetter.js';
 
 const PORT = process.env.PORT || 3001;
 
-const frontendBuildPath = path.join(process.cwd(), '/frontend/build');
+const frontendBuildPath = path.join('/frontend/build');
+const processPath = path.join(process.cwd());
 
 program
   .version('1.0.0', '-v, --version')
@@ -19,10 +20,10 @@ const options = program.opts();
 const start = () => {
   const app = express();
 
-  app.use(express.static(path.join(options.static)));
+  app.use(express.static(path.join(processPath, options.static)));
 
   app.get('/', (request, response) => {
-    response.sendFile(path.join(process.cwd(), options.static, 'index.html'));
+    response.sendFile(path.join(processPath, options.static, 'index.html'));
   });
 
   app.get('/api', async (request, response) => {
