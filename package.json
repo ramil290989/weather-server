@@ -1,6 +1,6 @@
 {
   "name": "@ramil290989/weather-server",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "weather server yandex api",
   "main": "./bin/index.js",
   "type": "module",
