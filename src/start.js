@@ -12,6 +12,8 @@ const start = () => {
   };
 
   app.get('/api', async (request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Content-Type', 'text/plain');
     const timestampLast = state.weatherData.now;
     const isLoading = timestampLast ? loadingTime(timestampLast) : true;
     if (isLoading) {
