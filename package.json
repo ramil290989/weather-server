@@ -4,11 +4,8 @@
   "description": "weather server yandex api",
   "main": "./bin/index.js",
   "type": "module",
-  "bin": {
-    "start-weather-server": "./bin/index.js"
-  },
   "scripts": {
-    "start-weather-server": "node ./bin/index.js",
+    "start": "node ./bin/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
