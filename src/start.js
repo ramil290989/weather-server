@@ -8,7 +8,7 @@ const start = () => {
 
   const state = {
     weatherData: {},
-    errors: '',
+    error: '',
   };
 
   app.get('/api', async (request, response) => {
@@ -17,9 +17,11 @@ const start = () => {
     const timestampLast = state.weatherData.now;
     const isLoading = timestampLast ? loadingTime(timestampLast) : true;
     if (isLoading) {
-      state.weatherData = await dataGetter();
+      const loadData = await dataGetter();
+      state.weatherData = loadData.data;
+      state.error = loadData.error;
     }
-    response.send(JSON.stringify(state.weatherData));
+    response.send(JSON.stringify(state));
   });
 
   app.listen(PORT, () => {
