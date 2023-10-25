@@ -1,21 +1,23 @@
-import path from 'path';
 import express from 'express';
+import loadingTime from './loadingTime.js';
 import dataGetter from './dataGetter.js';
 
-const start = (staticPath) => {
-  
+const start = () => {  
   const PORT = process.env.PORT || 3001;
   const app = express();
 
-  app.use(express.static(path.join(process.cwd(), staticPath)));
-
-  app.get('/', (request, response) => {
-    response.sendFile(path.join(process.cwd(), staticPath, 'index.html'));
-  });
+  const state = {
+    weatherData: {},
+    errors: '',
+  };
 
   app.get('/api', async (request, response) => {
-    const data = await dataGetter();
-    response.json({ data });
+    const timestampLast = state.weatherData.now;
+    const isLoading = timestampLast ? loadingTime(timestampLast) : true;
+    if (isLoading) {
+      state.weatherData = await dataGetter();
+    }
+    response.json(state.weatherData);
   });
 
   app.listen(PORT, () => {
