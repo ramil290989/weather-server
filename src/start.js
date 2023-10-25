@@ -17,7 +17,7 @@ const start = () => {
     if (isLoading) {
       state.weatherData = await dataGetter();
     }
-    response.send(state.weatherData);
+    response.send(JSON.stringify(state.weatherData));
   });
 
   app.listen(PORT, () => {
