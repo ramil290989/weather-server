@@ -1,28 +1,21 @@
 import express from 'express';
-import loadingTime from './loadingTime.js';
-import dataGetter from './dataGetter.js';
+import state from './state.js';
+import getCurrentWeather from './getCurrentWeather.js';
+import getWeather10Days from './getWeather10days.js';
 
 const start = () => {  
   const PORT = process.env.PORT || 3001;
   const app = express();
 
-  const state = {
-    weatherData: {},
-    error: '',
-  };
+  getCurrentWeather();
+  getWeather10Days();
 
-  app.get('/api', async (request, response) => {
-    response.setHeader('Access-Control-Allow-Origin', '*');
-    response.setHeader('Content-Type', 'text/plain');
-    const timestampLast = state.weatherData.now;
-    const isLoading = timestampLast ? loadingTime(timestampLast) : true;
-    if (isLoading) {
-      const loadData = await dataGetter();
-      state.weatherData = loadData.data;
-      state.error = loadData.error;
-    }
-    response.send(JSON.stringify(state));
-  });
+  setTimeout(() => {
+    const current = JSON.stringify(state.currentWeather, null, ' ');
+    const weather10Days = JSON.stringify(state.weather10Days, null, ' ');
+    console.log(current);
+    console.log(weather10Days);
+  }, 1000);
 
   app.listen(PORT, () => {
     console.log(`server starting on port ${PORT}`);
