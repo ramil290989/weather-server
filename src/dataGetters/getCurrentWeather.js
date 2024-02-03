@@ -3,6 +3,7 @@ import axios from 'axios';
 import state from '../state.js';
 import loadingTime from '../helpers/loadingTime.js';
 import getWeatherFor24Hours from '../dataNormalize/getWeatherFor24Hours.js';
+import addCurrentIds from '../dataNormalize/addCurrentIds.js';
 
 const getCurrentWeather = async () => {
   const timeNow = new Date();
@@ -26,6 +27,7 @@ const getCurrentWeather = async () => {
     try {
       const weatherData = await axios.get(requestUrl, { headers });
       const currentWeatherData = getWeatherFor24Hours(weatherData.data.response);
+      addCurrentIds(currentWeatherData);
       state.error = null;
       state.currentWeather.data = currentWeatherData;
       state.currentWeather.lastLoadingTime = timeNow;
