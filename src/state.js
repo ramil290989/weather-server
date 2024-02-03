@@ -1,6 +1,12 @@
 const state = {
-  currentWeather: null,
-  weather10Days: null,
+  currentWeather: {
+    data: {},
+    lastLoadingTime: null,
+  },
+  weather10Days: {
+    data: {},
+    lastLoadingTime: null,
+  },
   error: null,
 };
 
