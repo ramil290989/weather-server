@@ -1,0 +1,18 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "airbnb",
+    "airbnb-base",
+    "airbnb/hooks",
+    "plugin:import/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "import/extensions": 0
+  }
+}
