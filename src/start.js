@@ -11,6 +11,9 @@ const start = () => {
 
   app.get('/api/current', (req, res) => {
     console.log('getting current');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     getCurrentWeather()
       .then(() => res.send(state.currentWeather.data));
   });
