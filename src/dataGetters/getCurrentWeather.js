@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import 'dotenv/config';
 import axios from 'axios';
 import state from '../state.js';
@@ -25,6 +26,7 @@ const getCurrentWeather = async () => {
 
   if (loadingTime(state.currentWeather.lastLoadingTime)) {
     try {
+      console.log('START GET current data');
       const weatherData = await axios.get(requestUrl, { headers });
       const currentWeatherData = getWeatherFor24Hours(weatherData.data.response);
       addCurrentIds(currentWeatherData);
@@ -32,7 +34,10 @@ const getCurrentWeather = async () => {
       state.currentWeather.data = currentWeatherData;
       state.currentWeather.lastLoadingTime = timeNow;
     } catch (e) {
+      console.log('ERROR GET current data');
       state.error = e;
+    } finally {
+      console.log('END GET current data');
     }
   }
 };

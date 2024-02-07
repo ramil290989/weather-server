@@ -2,7 +2,7 @@
 import express from 'express';
 import state from './state.js';
 import getCurrentWeather from './dataGetters/getCurrentWeather.js';
-// import getWeather10Days from './dataGetters/getWeather10days.js';
+import getForecastWeather from './dataGetters/getForecastWeather.js';
 // import current from './currentData.js';
 
 const start = () => {
@@ -10,9 +10,19 @@ const start = () => {
   const app = express();
 
   app.get('/api/current', (req, res) => {
-    console.log('getting current');
     getCurrentWeather()
-      .then(() => res.send(state.currentWeather.data));
+      .then(() => {
+        console.log('SEND current');
+        res.send(state.currentWeather.data);
+      });
+  });
+
+  app.get('/api/forecast', (req, res) => {
+    getForecastWeather()
+      .then(() => {
+        console.log('SEND forecast');
+        res.send(state.forecast.data);
+      });
   });
 
   app.listen(PORT, () => {

@@ -3,7 +3,7 @@ const state = {
     data: {},
     lastLoadingTime: null,
   },
-  weather10Days: {
+  forecast: {
     data: {},
     lastLoadingTime: null,
   },
