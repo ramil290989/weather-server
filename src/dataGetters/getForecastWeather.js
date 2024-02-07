@@ -27,7 +27,7 @@ const getForecastWeather = async () => {
       console.log('START GET forecast');
       const weatherData = await axios.get(requestUrl, { headers });
       state.error = null;
-      state.forecast.data = weatherData;
+      state.forecast.data = weatherData.data.response;
       state.forecast.lastLoadingTime = timeNow;
     } catch (e) {
       console.log('ERROR GET forecast');
